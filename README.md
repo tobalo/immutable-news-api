@@ -76,7 +76,7 @@ sequenceDiagram
    The API will be available at `http://localhost:8000`.
 
 ## Docker Setup
-
+*The lxml dependency requires system dependencies to be installed. Additional setup may be required on some systems.*
 1. Build the Docker image:
    ```
    docker build -t immutable-news-api .
