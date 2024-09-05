@@ -7,8 +7,8 @@ This API provides functionality to ingest news articles and initiate a crawling 
 flowchart TD
     A[Client] -->|Submit News| B[Server]
     B -->|Validate & Store| C[(MongoDB)]
-    C -->|Pull Data| D[Constellation Metgraph Data L1]
-    D -->|Tokenize & Make Immutable| E[Immutable Data Store]
+    C -->|Pull Data| D[Metagraph Data L1]
+    D -->|Tokenize, Snapshot, & Make Immutable| E[Metagraph L0]
     A -->|Request News| B
     B -->|Retrieve Data| C
     B -->|Serve News| A
