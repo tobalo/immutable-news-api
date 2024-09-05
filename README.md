@@ -2,7 +2,7 @@
 
 This API provides functionality to ingest news articles and initiate a crawling workflow.
 
-## System Overview
+## General Data Flow Diagram
 ```mermaid
 graph TD
    A[Client] -->|POST /news/submit| B(FastAPI)
@@ -25,6 +25,37 @@ graph TD
    style L fill:#bfb,stroke:#333,stroke-width:2px
    style M fill:#fbf,stroke:#333,stroke-width:2px
    style N fill:#fbb,stroke:#333,stroke-width:2px
+```
+## News Specific Data Flow Diagram
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant S as Server
+    participant M as MongoDB
+    participant CMD as Constellation Metgraph Data L1
+
+    C->>S: POST /news/submit
+    S->>M: Check for duplicate URL
+    M-->>S: URL status
+    alt URL is unique
+        S->>M: Store news item
+        M-->>S: Confirmation
+        S->>C: 200 OK
+        M->>CMD: Pull new data
+        CMD->>CMD: Tokenize and make immutable
+    else URL is duplicate
+        S->>C: 400 Bad Request
+    end
+
+    C->>S: GET /news?skip=0&limit=10
+    S->>M: Retrieve news items
+    M-->>S: News items
+    S->>C: 200 OK with news items
+
+    C->>S: GET /news/{UUID}
+    S->>M: Retrieve specific news item
+    M-->>S: News item
+    S->>C: 200 OK with news item
 ```
 
 ## Setup Instructions
