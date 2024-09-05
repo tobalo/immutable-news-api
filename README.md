@@ -77,21 +77,12 @@ sequenceDiagram
 
 ## Docker Setup
 
-1. Ensure your `requirements.txt` file includes `lxml[html_clean]`:
-   ```
-   fastapi
-   uvicorn
-   newspaper3k
-   pydantic
-   lxml[html_clean]
-   ```
-
-2. Build the Docker image:
+1. Build the Docker image:
    ```
    docker build -t immutable-news-api .
    ```
 
-3. Run the Docker container:
+2. Run the Docker container:
    ```
    docker run -p 8000:8000 immutable-news-api
    ```
