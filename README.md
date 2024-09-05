@@ -18,18 +18,27 @@ flowchart TD
 sequenceDiagram
     participant C as Client
     participant S as Server
+    participant NC as News Crawler
     participant M as MongoDB
-    participant CMD as Constellation Metgraph Data L1
+    participant CMD1 as Metagraph Data L1
+    participant CMD0 as Metagraph L0
 
     C->>S: POST /news/submit
     S->>M: Check for duplicate URL
     M-->>S: URL status
     alt URL is unique
-        S->>M: Store news item
-        M-->>S: Confirmation
-        S->>C: 200 OK
-        M->>CMD: Pull new data
-        CMD->>CMD: Tokenize and make immutable
+        S->>NC: Crawl news source URL
+        alt Crawling successful
+            NC-->>S: Crawled content
+            S->>M: Store news item with crawled content
+            M-->>S: Confirmation
+            S->>C: 200 OK
+            M->>CMD1: Pull new data
+            CMD1->>CMD0: Snapshot & Tokenize
+        else Crawling failed
+            NC-->>S: Crawling error
+            S->>C: Error - Unable to crawl news source
+        end
     else URL is duplicate
         S->>C: 400 Bad Request
     end
@@ -102,7 +111,8 @@ Ingests a news article from a given URL and starts a crawling workflow.
 ```json
 {
 "url": "https://example.com/news-article"
-}```
+}
+```
 
 #### Response
 

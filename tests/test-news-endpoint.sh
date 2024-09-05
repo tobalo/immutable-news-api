@@ -4,7 +4,7 @@
 BASE_URL="http://localhost:8000"
 
 # Sample news URL to test
-NEWS_URL="https://techcrunch.com/2024/09/04/boeing-and-nasa-prepare-to-bring-starliner-home-without-its-crew-on-friday/"
+NEWS_URL="https://techcrunch.com/2024/09/05/googles-ai-powered-ask-photos-feature-begins-u-s-rollout/"
 
 # Specific article ID to test
 SPECIFIC_ARTICLE_ID="a830d26d-969c-4295-ad5a-9f379137fef6"
