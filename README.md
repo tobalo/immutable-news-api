@@ -4,27 +4,14 @@ This API provides functionality to ingest news articles and initiate a crawling 
 
 ## General Data Flow Diagram
 ```mermaid
-graph TD
-   A[Client] -->|POST /news/submit| B(FastAPI)
-   B -->|Validate URL| C{URL Exists in DB?}
-   C -->|Yes| D[Return Existing Article ID]
-   C -->|No| E[Crawl News]
-   E --> F{Crawl Successful?}
-   F -->|No| G[Return Error]
-   F -->|Yes| H[Store in MongoDB]
-   H --> I[Return New Article ID]
-   J[Client] -->|GET /news| B
-   K[Client] -->|GET /news/{article_id}| B
-   B -->|Fetch Articles| L[(MongoDB)]
-   L -->|Articles| M[Metagraph Data L1]
-   M -->|Tokenization| N[Tokenized Data]
-   style A fill:#f9f,stroke:#333,stroke-width:2px
-   style J fill:#f9f,stroke:#333,stroke-width:2px
-   style K fill:#f9f,stroke:#333,stroke-width:2px
-   style B fill:#bbf,stroke:#333,stroke-width:2px
-   style L fill:#bfb,stroke:#333,stroke-width:2px
-   style M fill:#fbf,stroke:#333,stroke-width:2px
-   style N fill:#fbb,stroke:#333,stroke-width:2px
+flowchart TD
+    A[Client] -->|Submit News| B[Server]
+    B -->|Validate & Store| C[(MongoDB)]
+    C -->|Pull Data| D[Constellation Metgraph Data L1]
+    D -->|Tokenize & Make Immutable| E[Immutable Data Store]
+    A -->|Request News| B
+    B -->|Retrieve Data| C
+    B -->|Serve News| A
 ```
 ## News Specific Data Flow Diagram
 ```mermaid
