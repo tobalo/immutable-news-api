@@ -48,11 +48,13 @@ sequenceDiagram
 ## Setup Instructions
 
 ### Project Setup
-
+*Ensure you have a MongoDB instance running*
 1. Clone the repository:
    ```
    git clone https://github.com/your-repo/immutable-news-api.git
    cd immutable-news-api
+   cp .env.example .env
+   # Modify .env with your MongoDB URI and database name
    ```
 
 2. Create a virtual environment and activate it:
