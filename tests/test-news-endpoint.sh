@@ -4,10 +4,13 @@
 BASE_URL="http://localhost:8000"
 
 # Sample news URL to test
-NEWS_URL="https://techcrunch.com/2024/09/05/googles-ai-powered-ask-photos-feature-begins-u-s-rollout/"
+NEWS_URL="https://techcrunch.com/2024/09/09/heres-the-full-list-of-28-us-ai-startups-that-have-raised-100m-or-more-in-2024"
+
+# Default DAG address
+DEFAULT_DAG_ADDRESS="DAG38E4KCMhidUv8SvovzuJXKsZZ9Ldn58xA6rYz"
 
 # Specific article ID to test
-SPECIFIC_ARTICLE_ID="a830d26d-969c-4295-ad5a-9f379137fef6"
+SPECIFIC_ARTICLE_ID="fc3601df-4d46-4b22-9b70-507d4cc1a985"
 
 # Function to make a request and log the response
 make_request() {
@@ -32,12 +35,12 @@ make_request() {
 
 # Test POST /news/submit (first submission)
 echo "1. Submitting a news article"
-submit_response=$(make_request "/news/submit" "POST" "{\"url\": \"$NEWS_URL\"}")
+submit_response=$(make_request "/news/submit" "POST" "{\"url\": \"$NEWS_URL\", \"dag_address\": \"$DEFAULT_DAG_ADDRESS\"}")
 article_id=$(echo "$submit_response" | grep -o '"id": "[^"]*' | cut -d'"' -f4)
 
 # Test POST /news/submit (second submission of the same article)
 echo "2. Submitting the same news article again"
-make_request "/news/submit" "POST" "{\"url\": \"$NEWS_URL\"}"
+make_request "/news/submit" "POST" "{\"url\": \"$NEWS_URL\", \"dag_address\": \"$DEFAULT_DAG_ADDRESS\"}"
 
 # Test GET /news (list articles)
 echo "3. Listing news articles"
@@ -54,5 +57,9 @@ fi
 # Test GET /news/{article_id} (get specific article with predefined UUID)
 echo "5. Getting specific news article with predefined UUID"
 make_request "/news/$SPECIFIC_ARTICLE_ID" "GET"
+
+# Test GET /news/constellation/{dag_address}
+echo "6. Getting news articles by constellation"
+make_request "/news/constellation/$DEFAULT_DAG_ADDRESS?skip=0&limit=10" "GET"
 
 echo "Test script completed."

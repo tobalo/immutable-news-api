@@ -1,6 +1,8 @@
 import asyncio
 from api import crawl_news
 
+DEFAULT_DAG_ADDRESS = "DAG38E4KCMhidUv8SvovzuJXKsZZ9Ldn58xA6rYz"
+
 async def test_crawl_news():
     # Test URLs
     urls = [
@@ -9,10 +11,10 @@ async def test_crawl_news():
 
     for url in urls:
         print(f"\nTesting URL: {url}")
-        result = await crawl_news(url)
+        result = await crawl_news(url, DEFAULT_DAG_ADDRESS)
         if result:
             print("Crawl successful:")
-            for key, value in result.items():
+            for key, value in result.dict().items():
                 if key == 'content':
                     print(f"{key}: {value[:100]}...")  # Print only first 100 characters of content
                 else:
