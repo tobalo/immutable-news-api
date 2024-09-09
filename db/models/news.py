@@ -17,6 +17,7 @@ class NewsArticle(BaseModel):
     videos: List[str] = []
     keywords: List[str] = []
     summary: Optional[str] = None
+    dag_address: Optional[str] = None  # Added optional dag_address field
 
     class Config:
         allow_population_by_field_name = True
