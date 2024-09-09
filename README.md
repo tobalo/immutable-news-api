@@ -79,7 +79,7 @@ sequenceDiagram
 
 4. Run the FastAPI application:
    ```
-   uvicorn api.api:app --reload
+   fastapi dev api.py
    ```
 
    The API will be available at `http://localhost:8000`.
