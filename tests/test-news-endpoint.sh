@@ -4,7 +4,7 @@
 BASE_URL="http://localhost:8000"
 
 # Sample news URL to test
-NEWS_URL="https://techcrunch.com/2024/09/09/heres-the-full-list-of-28-us-ai-startups-that-have-raised-100m-or-more-in-2024"
+NEWS_URL="https://www.cnn.com/2024/09/08/us/linda-sun-new-york-china-investigation/index.html"
 
 # Default DAG address
 DEFAULT_DAG_ADDRESS="DAG38E4KCMhidUv8SvovzuJXKsZZ9Ldn58xA6rYz"

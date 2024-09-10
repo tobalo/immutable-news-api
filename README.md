@@ -106,11 +106,20 @@ Ingests a news article from a given URL and starts a crawling workflow.
 
 #### Request
 
+- URL: http://localhost:8000/news/submit
 - Method: POST
 - Content-Type: application/json
+- Payload:
 ```json
 {
-"url": "https://example.com/news-article"
+   "url": "https://examplenews.com/year/month/day/news-name-blahblah,
+   "dag_address": "DAG38E4KCMhidUv8SvovzuJXKsZZ9Ldn58xA6rYz"
+}
+```
+
+```json
+{
+"url": "https://localhost:8000/news-article"
 }
 ```
 
@@ -121,7 +130,17 @@ Ingests a news article from a given URL and starts a crawling workflow.
 ```json
 {
 "message": "News article successfully crawled and stored"
-}```
+}
+```
+
+### GET /news?skip=0&limit=10
+
+Retrieves a list of news articles.
+
+#### Request
+
+- Method: GET
+
 ## Testing
 
 1. Run the test script:
