@@ -22,5 +22,5 @@ EXPOSE 8000
 # Define environment variable
 ENV NAME ImmutableNewsAPI
 
-# Run app.py when the container launches
-CMD ["uvicorn", "api.api:app", "--host", "0.0.0.0", "--port", "8000"]
+# Run server.py when the container launches in production
+CMD ["uvicorn", "server:app", "--host", "0.0.0.0", "--port", "8000"]
