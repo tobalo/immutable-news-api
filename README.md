@@ -150,8 +150,7 @@ Retrieves a list of news articles.
 
 ## Project Structure
 
-- `app/`
-  - `main.py`: Main FastAPI application entry point
+- `server.py`: Main FastAPI application entry point
   - `api/`
     - `routes/`
       - `news.py`: News-related API routes
@@ -159,7 +158,7 @@ Retrieves a list of news articles.
       - `news_crawler.py`: News crawling service
   - `db/`
     - `config.py`: Database connection and configuration
-   - `models/`
+    - `models/`
       - `news.py`: Pydantic models for news data
   - `config.py`: Application configuration
 - `tests/`
