@@ -117,12 +117,6 @@ Ingests a news article from a given URL and starts a crawling workflow.
 }
 ```
 
-```json
-{
-"url": "https://localhost:8000/news-article"
-}
-```
-
 #### Response
 
 - Status: 200 OK
@@ -156,13 +150,26 @@ Retrieves a list of news articles.
 
 ## Project Structure
 
-- `api/`
-  - `api.py`: Main FastAPI application
-  - `test_crawl_news.py`: Test script for the crawl_news function
-  - `test-news.sh`: Shell script to test the API endpoint
+- `app/`
+  - `main.py`: Main FastAPI application entry point
+  - `api/`
+    - `routes/`
+      - `news.py`: News-related API routes
+    - `helpers/`
+      - `news_crawler.py`: News crawling service
+  - `db/`
+    - `config.py`: Database connection and configuration
+   - `models/`
+      - `news.py`: Pydantic models for news data
+  - `config.py`: Application configuration
+- `tests/`
+  - `test_news_api.py`: API tests for news endpoints
+  - `test_news_crawler.py`: Unit tests for news crawler
 - `requirements.txt`: List of Python dependencies
 - `Dockerfile`: Docker configuration for the application
-- `README.md`: This file
+- `README.md`: Project documentation (this file)
+- `.env.example`: Example environment variables file
+- `.gitignore`: Git ignore file
 
 ## Contributing
 
